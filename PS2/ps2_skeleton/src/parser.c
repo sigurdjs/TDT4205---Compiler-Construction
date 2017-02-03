@@ -357,16 +357,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  3
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   1
+#define YYLAST   5
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  23
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  2
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  2
+#define YYNRULES  4
 /* YYNRULES -- Number of states.  */
-#define YYNSTATES  4
+#define YYNSTATES  8
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
@@ -413,19 +413,20 @@ static const yytype_uint8 yytranslate[] =
    YYRHS.  */
 static const yytype_uint8 yyprhs[] =
 {
-       0,     0,     3
+       0,     0,     3,     5,     9
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
-      24,     0,    -1,     8,    -1
+      24,     0,    -1,    20,    -1,    24,     3,    24,    -1,    24,
+       4,    24,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    13,    13
+       0,    20,    20,    21,    22
 };
 #endif
 
@@ -437,7 +438,7 @@ static const char *const yytname[] =
   "$end", "error", "$undefined", "'+'", "'-'", "'*'", "'/'", "UMINUS",
   "FUNC", "PRINT", "RETURN", "CONTINUE", "IF", "THEN", "ELSE", "WHILE",
   "DO", "OPENBLOCK", "CLOSEBLOCK", "VAR", "NUMBER", "IDENTIFIER", "STRING",
-  "$accept", "program", 0
+  "$accept", "expr", 0
 };
 #endif
 
@@ -455,13 +456,13 @@ static const yytype_uint16 yytoknum[] =
 /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    23,    24
+       0,    23,    24,    24,    24
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     1
+       0,     2,     1,     3,     3
 };
 
 /* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
@@ -469,7 +470,7 @@ static const yytype_uint8 yyr2[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     2,     0,     1
+       0,     2,     0,     1,     0,     0,     3,     4
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
@@ -480,16 +481,16 @@ static const yytype_int8 yydefgoto[] =
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-#define YYPACT_NINF -9
+#define YYPACT_NINF -16
 static const yytype_int8 yypact[] =
 {
-      -8,    -9,     1,    -9
+     -15,   -16,     0,   -16,   -15,   -15,   -16,   -16
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -9,    -9
+     -16,    -3
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -499,19 +500,19 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-       1,     3
+       3,     6,     7,     4,     5,     1
 };
 
 static const yytype_uint8 yycheck[] =
 {
-       8,     0
+       0,     4,     5,     3,     4,    20
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
    symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     8,    24,     0
+       0,    20,    24,     0,     3,     4,    24,    24
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1326,16 +1327,23 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 13 "src/parser.y"
-    {
-        root = (node_t *) malloc ( sizeof(node_t) );
-        node_init ( root, PROGRAM, NULL, 0 );
-      ;}
+#line 20 "src/parser.y"
+    { node_init((yyval),NUMBER_DATA,(yyvsp[(1) - (1)]),0); ;}
+    break;
+
+  case 3:
+#line 21 "src/parser.y"
+    { node_init((yyval),EXPRESSION,(yyvsp[(2) - (3)]),2,(yyvsp[(1) - (3)]),(yyvsp[(3) - (3)])); ;}
+    break;
+
+  case 4:
+#line 22 "src/parser.y"
+    { node_init((yyval),EXPRESSION,(yyvsp[(2) - (3)]),2,(yyvsp[(1) - (3)]),(yyvsp[(3) - (3)])); ;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1339 "y.tab.c"
+#line 1347 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1549,12 +1557,10 @@ yyreturn:
 }
 
 
-#line 18 "src/parser.y"
+#line 24 "src/parser.y"
 
 
-int
-yyerror ( const char *error )
-{
+int yyerror ( const char *error ) {
     fprintf ( stderr, "%s on line %d\n", error, yylineno );
     exit ( EXIT_FAILURE );
 }

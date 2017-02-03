@@ -1,0 +1,7 @@
+123
+PUSH
+3
+SUB
+POP
+OUT
+END

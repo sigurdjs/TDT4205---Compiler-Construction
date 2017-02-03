@@ -1,9 +1,7 @@
 #include <vslc.h>
 
 
-void
-node_print ( node_t *root, int nesting )
-{
+void node_print ( node_t *root, int nesting ) {
     if ( root != NULL )
     {
         /* Print the type of node indented by the nesting level */
@@ -17,7 +15,7 @@ node_print ( node_t *root, int nesting )
              root->type == EXPRESSION ) 
             printf ( "(%s)", (char *) root->data );
         else if ( root->type == NUMBER_DATA )
-            printf ( "(%ld)", *((int64_t *)root->data) );
+            printf ( "(%lld)", *((int64_t *)root->data) );
 
         /* Make a new line, and traverse the node's children in the same manner */
         putchar ( '\n' );
@@ -30,23 +28,36 @@ node_print ( node_t *root, int nesting )
 
 
 /* Take the memory allocated to a node and fill it in with the given elements */
-void
-node_init (node_t *nd, node_index_t type, void *data, uint64_t n_children, ...)
-{
+void node_init (node_t *nd, node_index_t type, void *data, uint64_t n_children, ...) {
     nd->type = type;
+    nd->data = data;
+    nd->n_children = n_children;
+    nd->children = (node_t **)malloc(sizeof(node_t)*n_children);
+    va_list ap;
+    va_start(ap, n_children);
+    for(int i = 0; i < n_children; i++) {
+        nd->children[i] = va_arg(ap, node_t*);
+    }
 }
 
 
 /* Remove a node and its contents */
-void
-node_finalize ( node_t *discard )
-{
+void node_finalize ( node_t *discard ) {
+    if(discard != NULL) {
+        free(discard->children);
+        free(discard);
+    }
 }
 
 
 /* Recursively remove the entire tree rooted at a node */
-void
-destroy_subtree ( node_t *discard )
-{
-    free ( discard );
+void destroy_subtree ( node_t *discard ) {
+    if(discard != NULL) {
+        for(int i = 0; i < discard->n_children; i++) {
+            destroy_subtree(discard->children[i]);
+            node_finalize(discard->children[i]);
+        }
+    }
 }
+
+
