@@ -29,7 +29,6 @@ void node_print ( node_t *root, int nesting ) {
 
 /* Take the memory allocated to a node and fill it in with the given elements */
 void node_init (node_t *nd, node_index_t type, void *data, uint64_t n_children, ...) {
-    printf("Successfully entered node_init \n");
     nd->type = type;
     nd->data = data;
     nd->n_children = n_children;
@@ -58,7 +57,6 @@ void destroy_subtree ( node_t *discard ) {
                 destroy_subtree(discard->children[i]);
             } 
         }
-        printf("Destroying node \n");
         node_finalize(discard);
     }
 }
