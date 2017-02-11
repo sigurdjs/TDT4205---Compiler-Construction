@@ -29,6 +29,7 @@ void node_print ( node_t *root, int nesting ) {
 
 /* Take the memory allocated to a node and fill it in with the given elements */
 void node_init (node_t *nd, node_index_t type, void *data, uint64_t n_children, ...) {
+    printf("Successfully entered node_init \n");
     nd->type = type;
     nd->data = data;
     nd->n_children = n_children;
@@ -40,11 +41,10 @@ void node_init (node_t *nd, node_index_t type, void *data, uint64_t n_children, 
     }
 }
 
-
 /* Remove a node and its contents */
 void node_finalize ( node_t *discard ) {
     if(discard != NULL) {
-        free(discard->children);
+//        free(discard->children);
         free(discard);
     }
 }
@@ -54,9 +54,12 @@ void node_finalize ( node_t *discard ) {
 void destroy_subtree ( node_t *discard ) {
     if(discard != NULL) {
         for(int i = 0; i < discard->n_children; i++) {
-            destroy_subtree(discard->children[i]);
-            node_finalize(discard->children[i]);
+            if(discard->children[i] != NULL) {
+                destroy_subtree(discard->children[i]);
+            } 
         }
+        printf("Destroying node \n");
+        node_finalize(discard);
     }
 }
 

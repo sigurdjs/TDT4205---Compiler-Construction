@@ -5,8 +5,10 @@
 node_t *root;
 
 int main ( int argc, char **argv ) {
-    yylex();
-
+    /*while(1) {
+        yylex();
+    }*/
+    yyparse();
     /*root = (node_t *)malloc(sizeof(node_t));
     node_t *node1 = (node_t *)malloc(sizeof(node_t));
     node_t *node2 = (node_t *)malloc(sizeof(node_t));
@@ -17,7 +19,8 @@ int main ( int argc, char **argv ) {
         
     node_init(root,PROGRAM,NULL,3,node1,node2,node3);
     */
-    yyparse();
-    node_print ( root, 0 );
-    destroy_subtree ( root );
+    //yyparse();
+    //node_print ( root, 0 );
+    //destroy_subtree ( root );
+    
 }

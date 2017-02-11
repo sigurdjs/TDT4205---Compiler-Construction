@@ -7,6 +7,11 @@
 
 %state STRING
 
+VARIABLE [a-zA-Z_][a-zA-Z0-9_]*
+COMMENT \/\/.*\n
+DIGIT [0-9]+
+SPACE [\t\r\v\n ]+
+
 %%
 FUNC                    {printf("Found FUNC\n"); return FUNC;}
 BEGIN                   {printf("Found BEGIN\n"); return OPENBLOCK;}
@@ -21,23 +26,14 @@ WHILE                   {printf("Found WHILE\n"); return WHILE;}
 DO                      {printf("Found DO\n"); return DO;}
 VAR                     {printf("Found VAR\n"); return VAR;}
 
-    /*
-[a-zA-Z0-9_]*           {yylval = strdup(yytext);
-                        return IDENTIFIER;}
-                        */
+<INITIAL>{VARIABLE}     {printf("Found idn: %s\n",yytext); return IDENTIFIER;}
 
+<INITIAL>{COMMENT}      ;
+<INITIAL>{DIGIT}        {printf("Found number: %s\n",yytext); return NUMBER;}
+<INITIAL>{SPACE}        ; 
+        
+L?\"(\\.|[^\\"])*\" 	{printf("Found string: %s\n",yytext); return STRING;}
 
-\/\/.*                  ;
-[0-9]+                  {printf("Found NUMBER: %s\n",yytext); yylval = atoi(yytext);
-                        return NUMBER;}
-[-+]                    {printf("Found OPERATOR: %s\n",yytext); return yytext;}                        
+.                       {return (int) yytext[0];}
 
-    /*
-<INITIAL>\"             {BEGIN(STRING);}
-<STRING>\"              {BEGIN(INITIAL);}
-<STRING>.               {yylval = strdup(yytext);
-                        return STRING;}
-                        */
-[\t\r\v\n ]             ; 
-.                       {printf("Rest of text:%s",yytext); return yytext;}
 %%

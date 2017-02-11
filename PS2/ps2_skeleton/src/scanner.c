@@ -378,8 +378,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	yy_flex_strncpy( yytext, (yytext_ptr), yyleng + 1 ); \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 18
-#define YY_END_OF_BUFFER 19
+#define YY_NUM_RULES 19
+#define YY_END_OF_BUFFER 20
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -387,15 +387,22 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static yyconst flex_int16_t yy_accept[66] =
+static yyconst flex_int16_t yy_accept[127] =
     {   0,
-        0,    0,    0,    0,   19,   17,   16,   16,   15,   17,
-       14,   17,   17,   17,   17,   17,   17,   17,   17,   17,
-       17,   17,   13,   14,    0,    0,   11,    0,    0,    0,
-        7,    0,    0,    0,    0,    0,   13,    0,    0,    0,
-        3,    0,    0,    0,    0,   12,    0,    0,    0,    9,
-        1,    0,    0,    8,    0,    2,    0,    5,    0,   10,
-        0,    4,    0,    6,    0
+        0,    0,    0,    0,   20,   18,   16,   16,   18,   18,
+       15,   13,   13,   13,   13,   13,   13,   13,   13,   13,
+       13,   13,   13,   13,   19,   18,   18,   18,   18,   18,
+       18,   18,   18,   18,   18,   18,   18,   16,    0,   17,
+        0,    0,   15,   13,   13,   13,   11,   13,   13,   13,
+        7,    0,   13,   13,   13,   13,   13,    0,    0,   11,
+        0,    0,    0,    7,    0,    0,    0,    0,    0,    0,
+       14,   13,   13,   13,    3,   13,   13,   13,   13,   12,
+       13,    0,    0,    0,    3,    0,    0,    0,    0,   12,
+        0,   13,   13,    9,    1,   13,   13,    8,   13,    0,
+
+        0,    9,    1,    0,    0,    8,    0,    2,   13,    5,
+       13,   10,    2,    0,    5,    0,   10,   13,    4,    0,
+        4,   13,    0,    6,    6,    0
     } ;
 
 static yyconst flex_int32_t yy_ec[256] =
@@ -403,17 +410,17 @@ static yyconst flex_int32_t yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
         2,    1,    2,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    2,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    4,    1,    4,    1,    5,    6,    6,    6,
+        1,    2,    1,    4,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    5,    6,    6,    6,
         6,    6,    6,    6,    6,    6,    6,    1,    1,    1,
         1,    1,    1,    1,    7,    8,    9,   10,   11,   12,
-       13,   14,   15,    1,    1,   16,    1,   17,   18,   19,
-        1,   20,   21,   22,   23,   24,   25,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+       13,   14,   15,   16,   16,   17,   16,   18,   19,   20,
+       16,   21,   22,   23,   24,   25,   26,   16,   16,   16,
+        1,   27,    1,    1,   16,    1,   16,   16,   16,   16,
 
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+       16,   16,   16,   16,   16,   16,   16,   16,   16,   16,
+       16,   16,   16,   16,   16,   16,   16,   16,   16,   16,
+       16,   16,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -430,69 +437,102 @@ static yyconst flex_int32_t yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static yyconst flex_int32_t yy_meta[26] =
+static yyconst flex_int32_t yy_meta[28] =
     {   0,
-        1,    1,    2,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    2,    2,    2,    2,    2,
+        2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
+        2,    2,    2,    2,    2,    2,    1
+    } ;
+
+static yyconst flex_int16_t yy_base[130] =
+    {   0,
+        0,    0,   27,    0,  158,  159,   53,   55,   55,  152,
+      150,    0,  144,  135,  134,   43,  128,  139,  146,  128,
+      137,  133,  139,  131,  159,  133,  124,  123,   45,  117,
+      128,  135,  117,  126,  122,  128,  120,   62,   62,  159,
+      130,  129,  125,    0,  117,  111,    0,  106,  117,  108,
+        0,   63,  110,  101,  112,  101,  106,  107,  101,  159,
+       96,  107,   98,  159,  100,   91,  102,   91,   96,  107,
+      159,   94,   85,   96,    0,   97,   87,   80,   85,    0,
+       85,   86,   77,   88,  159,   89,   79,   72,   77,  159,
+       71,   69,   71,    0,    0,   62,   63,    0,   72,   63,
+
+       65,  159,  159,   56,   57,  159,   66,    0,   58,    0,
+       57,    0,  159,   56,  159,   55,  159,   48,    0,   47,
+      159,   59,   58,    0,  159,  159,   90,   66,   92
+    } ;
+
+static yyconst flex_int16_t yy_def[130] =
+    {   0,
+      126,    1,  126,    3,  126,  126,  126,  126,  127,  126,
+      126,  128,  128,  128,  128,  128,  128,  128,  128,  128,
+      128,  128,  128,  128,  126,  126,  126,  126,  126,  126,
+      126,  126,  126,  126,  126,  126,  126,  126,  127,  126,
+      127,  129,  126,  128,  128,  128,  128,  128,  128,  128,
+      128,  127,  128,  128,  128,  128,  128,  126,  126,  126,
+      126,  126,  126,  126,  126,  126,  126,  126,  126,  129,
+      126,  128,  128,  128,  128,  128,  128,  128,  128,  128,
+      128,  126,  126,  126,  126,  126,  126,  126,  126,  126,
+      126,  128,  128,  128,  128,  128,  128,  128,  128,  126,
+
+      126,  126,  126,  126,  126,  126,  126,  128,  128,  128,
+      128,  128,  126,  126,  126,  126,  126,  128,  128,  126,
+      126,  128,  126,  128,  126,    0,  126,  126,  126
+    } ;
+
+static yyconst flex_int16_t yy_nxt[187] =
+    {   0,
+        6,    7,    8,    9,   10,   11,   12,   13,   14,   15,
+       16,   17,   12,   12,   18,   12,   19,   12,   12,   20,
+       21,   12,   22,   12,   23,   24,    6,    6,    6,   25,
+        9,    6,    6,    6,   26,   27,   28,   29,   30,    6,
+        6,   31,    6,   32,    6,    6,   33,   34,    6,   35,
+        6,   36,   37,    6,   38,   38,   38,   38,   40,   48,
+       49,   61,   62,   38,   38,   40,   40,   44,  125,  124,
+      123,  122,  121,  120,  119,  118,  117,  116,  115,  114,
+      113,   41,  112,  111,  110,  109,  108,  107,   41,   41,
+       39,   39,   70,   70,  106,  105,  104,  103,  102,  101,
+
+      100,   99,   98,   97,   96,   95,   94,   93,   92,   71,
+       91,   90,   89,   88,   87,   86,   85,   84,   83,   82,
+       81,   80,   79,   78,   77,   76,   75,   74,   73,   72,
+       43,   71,  126,   69,   68,   67,   66,   65,   52,   64,
+       63,   60,   59,   58,   57,   56,   55,   54,   53,   52,
+       51,   50,   47,   46,   45,   43,   42,  126,    5,  126,
+      126,  126,  126,  126,  126,  126,  126,  126,  126,  126,
+      126,  126,  126,  126,  126,  126,  126,  126,  126,  126,
+      126,  126,  126,  126,  126,  126
+    } ;
+
+static yyconst flex_int16_t yy_chk[187] =
+    {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1
-    } ;
-
-static yyconst flex_int16_t yy_base[67] =
-    {   0,
-        0,    0,    0,    0,   69,   70,   70,   70,   70,   63,
-       61,   55,   47,   46,   10,   40,   50,   41,   49,   45,
-       51,   43,    0,   50,   42,   37,   70,   32,   42,   34,
-       70,   35,   27,   37,   27,   31,    0,   30,   22,   32,
-       70,   33,   24,   17,   22,   70,   22,   20,   21,   70,
-       70,   13,   14,   70,   22,   70,   15,   70,   14,   70,
-        7,   70,   18,   70,   70,   27
-    } ;
-
-static yyconst flex_int16_t yy_def[67] =
-    {   0,
-       65,    1,    1,    1,   65,   65,   65,   65,   65,   65,
-       65,   65,   65,   65,   65,   65,   65,   65,   65,   65,
-       65,   65,   66,   65,   65,   65,   65,   65,   65,   65,
-       65,   65,   65,   65,   65,   65,   66,   65,   65,   65,
-       65,   65,   65,   65,   65,   65,   65,   65,   65,   65,
-       65,   65,   65,   65,   65,   65,   65,   65,   65,   65,
-       65,   65,   65,   65,    0,   65
-    } ;
-
-static yyconst flex_int16_t yy_nxt[96] =
-    {   0,
-        6,    7,    8,    9,   10,   11,    6,   12,   13,   14,
-       15,   16,    6,    6,   17,    6,    6,    6,   18,   19,
-        6,   20,    6,   21,   22,   28,   29,   37,   64,   63,
-       62,   61,   60,   59,   58,   57,   56,   55,   54,   53,
-       52,   51,   50,   49,   48,   47,   46,   45,   44,   43,
-       42,   41,   40,   39,   38,   24,   36,   35,   34,   33,
-       32,   31,   30,   27,   26,   25,   24,   23,   65,    5,
-       65,   65,   65,   65,   65,   65,   65,   65,   65,   65,
-       65,   65,   65,   65,   65,   65,   65,   65,   65,   65,
-       65,   65,   65,   65,   65
-
-    } ;
-
-static yyconst flex_int16_t yy_chk[96] =
-    {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,   15,   15,   66,   63,   61,
-       59,   57,   55,   53,   52,   49,   48,   47,   45,   44,
-       43,   42,   40,   39,   38,   36,   35,   34,   33,   32,
-       30,   29,   28,   26,   25,   24,   22,   21,   20,   19,
-       18,   17,   16,   14,   13,   12,   11,   10,    5,   65,
-       65,   65,   65,   65,   65,   65,   65,   65,   65,   65,
-       65,   65,   65,   65,   65,   65,   65,   65,   65,   65,
-       65,   65,   65,   65,   65
+        1,    1,    1,    1,    1,    1,    1,    3,    3,    3,
+        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
+        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
+        3,    3,    3,    3,    7,    7,    8,    8,    9,   16,
+       16,   29,   29,   38,   38,   39,   52,  128,  123,  122,
+      120,  118,  116,  114,  111,  109,  107,  105,  104,  101,
+      100,    9,   99,   97,   96,   93,   92,   91,   39,   52,
+      127,  127,  129,  129,   89,   88,   87,   86,   84,   83,
 
+       82,   81,   79,   78,   77,   76,   74,   73,   72,   70,
+       69,   68,   67,   66,   65,   63,   62,   61,   59,   58,
+       57,   56,   55,   54,   53,   50,   49,   48,   46,   45,
+       43,   42,   41,   37,   36,   35,   34,   33,   32,   31,
+       30,   28,   27,   26,   24,   23,   22,   21,   20,   19,
+       18,   17,   15,   14,   13,   11,   10,    5,  126,  126,
+      126,  126,  126,  126,  126,  126,  126,  126,  126,  126,
+      126,  126,  126,  126,  126,  126,  126,  126,  126,  126,
+      126,  126,  126,  126,  126,  126
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static yyconst flex_int32_t yy_rule_can_match_eol[19] =
+static yyconst flex_int32_t yy_rule_can_match_eol[20] =
     {   0,
-0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,     };
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 
+        };
 
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
@@ -517,7 +557,7 @@ char *yytext_ptr;
 #line 2 "src/scanner.l"
 #include <vslc.h>
 
-#line 521 "<stdout>"
+#line 561 "<stdout>"
 
 #define INITIAL 0
 #define STRING 1
@@ -700,9 +740,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 10 "src/scanner.l"
+#line 15 "src/scanner.l"
 
-#line 706 "<stdout>"
+#line 746 "<stdout>"
 
 	if ( !(yy_init) )
 		{
@@ -755,13 +795,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 66 )
+				if ( yy_current_state >= 127 )
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 70 );
+		while ( yy_base[yy_current_state] != 159 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -797,107 +837,103 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 11 "src/scanner.l"
+#line 16 "src/scanner.l"
 {printf("Found FUNC\n"); return FUNC;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 12 "src/scanner.l"
+#line 17 "src/scanner.l"
 {printf("Found BEGIN\n"); return OPENBLOCK;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 13 "src/scanner.l"
+#line 18 "src/scanner.l"
 {printf("Found END\n"); return CLOSEBLOCK;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 14 "src/scanner.l"
+#line 19 "src/scanner.l"
 {printf("Found RETURN\n"); return RETURN;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 15 "src/scanner.l"
+#line 20 "src/scanner.l"
 {printf("Found PRINT\n"); return PRINT;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 16 "src/scanner.l"
+#line 21 "src/scanner.l"
 {printf("Found CONTINUE\n"); return CONTINUE;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 17 "src/scanner.l"
+#line 22 "src/scanner.l"
 {printf("Found IF\n"); return IF;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 18 "src/scanner.l"
+#line 23 "src/scanner.l"
 {printf("Found THEN\n"); return THEN;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 19 "src/scanner.l"
+#line 24 "src/scanner.l"
 {printf("Found ELSE\n"); return ELSE;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 20 "src/scanner.l"
+#line 25 "src/scanner.l"
 {printf("Found WHILE\n"); return WHILE;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 21 "src/scanner.l"
+#line 26 "src/scanner.l"
 {printf("Found DO\n"); return DO;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 22 "src/scanner.l"
+#line 27 "src/scanner.l"
 {printf("Found VAR\n"); return VAR;}
 	YY_BREAK
-/*
-[a-zA-Z0-9_]*           {yylval = strdup(yytext);
-                        return IDENTIFIER;}
-                        */
 case 13:
 YY_RULE_SETUP
-#line 30 "src/scanner.l"
-;
+#line 29 "src/scanner.l"
+{printf("Found idn: %s\n",yytext); return IDENTIFIER;}
 	YY_BREAK
 case 14:
+/* rule 14 can match eol */
 YY_RULE_SETUP
 #line 31 "src/scanner.l"
-{printf("Found NUMBER: %s\n",yytext); yylval = atoi(yytext);
-                        return NUMBER;}
+;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 33 "src/scanner.l"
-{printf("Found OPERATOR: %s\n",yytext); return yytext;}                        
+#line 32 "src/scanner.l"
+{printf("Found number: %s\n",yytext); return NUMBER;}
 	YY_BREAK
-/*
-<INITIAL>\"             {BEGIN(STRING);}
-<STRING>\"              {BEGIN(INITIAL);}
-<STRING>.               {yylval = strdup(yytext);
-                        return STRING;}
-                        */
 case 16:
 /* rule 16 can match eol */
 YY_RULE_SETUP
-#line 41 "src/scanner.l"
+#line 33 "src/scanner.l"
 ; 
 	YY_BREAK
 case 17:
+/* rule 17 can match eol */
 YY_RULE_SETUP
-#line 42 "src/scanner.l"
-{printf("Rest of text:%s",yytext); return yytext;}
+#line 35 "src/scanner.l"
+{printf("Found string: %s\n",yytext); return STRING;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 43 "src/scanner.l"
+#line 37 "src/scanner.l"
+{return (int) yytext[0];}
+	YY_BREAK
+case 19:
+YY_RULE_SETUP
+#line 39 "src/scanner.l"
 ECHO;
 	YY_BREAK
-#line 901 "<stdout>"
+#line 937 "<stdout>"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(STRING):
 	yyterminate();
@@ -1190,7 +1226,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 66 )
+			if ( yy_current_state >= 127 )
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
@@ -1218,11 +1254,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 66 )
+		if ( yy_current_state >= 127 )
 			yy_c = yy_meta[(unsigned int) yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
-	yy_is_jam = (yy_current_state == 65);
+	yy_is_jam = (yy_current_state == 126);
 
 	return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1907,7 +1943,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 43 "src/scanner.l"
+#line 39 "src/scanner.l"
 
 
 
