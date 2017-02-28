@@ -107,20 +107,21 @@ int is_purely_syntactic( node_t *node ) {
 
 void collapse_list( node_t **current, node_t **parent, int child_index) {
     if( is_list_type( (*parent) ) &&  (*parent)->type == (*current)->type ) { 
-        node_t *to_be_removed = (*current);
+        node_t *to_be_removed = *current;
         (*parent)->n_children += (*current)->n_children-1;
         node_t **new_array =  realloc((*parent)->children,sizeof(node_t*)*(*parent)->n_children);
         if(new_array != NULL) {
             (*parent)->children = new_array;
             (*parent)->children[(*parent)->n_children-1] = (*parent)->children[1];  //Move non_list node to end of children
             for(int i = 0; i < (*current)->n_children; i++) {
-                (*parent)->children[i] = (*current)->children[i];
+                (*parent)->children[i] = to_be_removed->children[i];
             } 
             free(to_be_removed);
         }
     }
 }
 
+int level = 0 ;
             
 void simplify_tree( node_t **current, node_t **parent, int child_index) {
     if( (*current) == NULL ) {
@@ -132,7 +133,7 @@ void simplify_tree( node_t **current, node_t **parent, int child_index) {
     }
 
     if(( is_purely_syntactic( (*current) ) && (*current)->data == NULL ) && (*current)->n_children == 1 ) {
-        node_t *to_be_removed = (*current);
+        node_t *to_be_removed = *current;
  //       node_t *to_be_removed = (*parent)->children[child_index];
         (*parent)->children[child_index] = (*current)->children[0];
         free(to_be_removed);
