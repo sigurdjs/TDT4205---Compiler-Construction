@@ -112,7 +112,7 @@ void collapse_list( node_t **current, node_t **parent, int child_index) {
         node_t **new_array =  realloc((*parent)->children,sizeof(node_t*)*(*parent)->n_children);
         if(new_array != NULL) {
             (*parent)->children = new_array;
-            (*parent)->children[(*parent)->n_children-1] = (*parent)->children[1];  //Move non_list node to end of children
+            (*parent)->children[(*parent)->n_children-1] = (*parent)->children[0];  //Move non_list node to end of children
             for(int i = 0; i < (*current)->n_children; i++) {
                 (*parent)->children[i] = to_be_removed->children[i];
             } 
@@ -121,8 +121,6 @@ void collapse_list( node_t **current, node_t **parent, int child_index) {
     }
 }
 
-int level = 0 ;
-            
 void simplify_tree( node_t **current, node_t **parent, int child_index) {
     if( (*current) == NULL ) {
         return;
