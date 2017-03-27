@@ -1,0 +1,40 @@
+String table:
+0: "argument 1 (a) is "
+1: "argument 2 (b) is "
+2: "(a^2-b^2)/-b is"
+3: "\nReturning result into shell env. variable '$?'"
+4: "'echo $?' displays last return value (as unsigned byte).\n"
+-- 
+Globals:
+y: global variable
+x: global variable
+z: global variable
+f: function 0:
+	2 local variables, 2 are parameters:
+	a: parameter 0
+	b: parameter 1
+-- 
+Bindings:
+Linked global var 'x'
+Linked parameter 0 ('a')
+Linked global var 'y'
+Linked parameter 1 ('b')
+Linked string 0
+Linked parameter 0 ('a')
+Linked string 1
+Linked parameter 1 ('b')
+Linked string 2
+Linked global var 'x'
+Linked global var 'y'
+Linked global var 'x'
+Linked global var 'y'
+Linked global var 'y'
+Linked global var 'z'
+Linked global var 'x'
+Linked global var 'y'
+Linked global var 'x'
+Linked global var 'y'
+Linked global var 'y'
+Linked string 3
+Linked string 4
+Linked global var 'z'

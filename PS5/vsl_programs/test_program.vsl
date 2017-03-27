@@ -1,0 +1,27 @@
+VAR x,y,z
+FUNC f(a,b)
+BEGIN
+
+    // Access arguments, assignments:
+    x := a
+    y := b
+    // Print statements
+
+    WHILE x < 10 DO
+    BEGIN
+        y := 0
+        WHILE y < 10 DO
+        BEGIN
+            PRINT "Looping....\n"
+            y := y + 1
+        END
+        x := x + 1
+    END
+
+
+    IF a > 1 THEN
+        PRINT "In if case\n"
+    ELSE
+        PRINT "In else case\n"
+    RETURN z
+END
