@@ -1,1 +1,4 @@
 *.zip
+/PS5/src/vslc.dSYM/*
+*.o
+
