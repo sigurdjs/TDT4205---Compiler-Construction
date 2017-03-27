@@ -12,6 +12,7 @@ typedef struct n {
 void node_init (
     node_t *n, node_index_t type, void *data, uint64_t n_children, ...
 );
+void find_locals(void);
 void node_print ( node_t *root, int nesting );
 void node_finalize ( node_t *discard );
 

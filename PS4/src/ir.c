@@ -60,7 +60,7 @@ static void insert_function(node_t* func, int seq)
         if (node != NULL) {
             switch (node->type) {
                 case IDENTIFIER_DATA:
-                    name = strdup(node->data);
+                    name = node->data;
                     break;
                 case VARIABLE_LIST:
                     nparms = node->n_children;
@@ -77,11 +77,6 @@ static void insert_function(node_t* func, int seq)
         .nparms = (size_t) nparms,
         .locals = locals
     };
-    /*symbol_t *entry = malloc(sizeof(symbol_t));
-    memcpy(entry,el,sizeof(symbol_t));
-    entry->node = NULL;
-    func->entry = entry;
-    printf("Type: %d\n", func->entry->type);*/
     tlhash_insert(global_names, el->name, strlen(el->name)+1, el);
 }
 
@@ -108,7 +103,6 @@ static void insert_local_var(node_t* var_list, tlhash_t *cur_table, int *seq);
 static void traverse_tree(node_t *node,tlhash_t *locals, stack *scope_stack, int *seq);
 static void link_variable(node_t *node, stack *scope_stack);
 static void add_string_data(node_t *node);
-void find_locals(void);
 
 void find_locals(void)
 {
@@ -116,7 +110,7 @@ void find_locals(void)
     symbol_t *global_list[n_globals];
     tlhash_values ( global_names, (void **)&global_list );
 
-    // Call bind_names on all those which are functions //
+    /* Call bind_names on all those which are functions */
     for ( size_t i=0; i<n_globals; i++ ) {
         if ( global_list[i]->type == SYM_FUNCTION ) {
             bind_names ( global_list[i], global_list[i]->node );
@@ -273,6 +267,7 @@ void destroy_symtab ( void )
             symbol_t *symbols[sz];
             tlhash_values(global_list[i]->locals,(void**)symbols);
             for(int j = 0; j < sz; j++) {
+                free(symbols[j]->locals);
                 free(symbols[j]);
             }
             tlhash_finalize(global_list[i]->locals);

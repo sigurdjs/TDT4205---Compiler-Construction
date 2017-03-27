@@ -1,7 +1,7 @@
 // Approximate square root by the Newton/Raphson method for f(x) = x^2 - n
 // f(x) = x^2 - n = 0
 // f'(x) = 2x
-// x{n+1} = x{n} - (x^2-n) / 2x 
+// x{n+1} = x{n} - (x^2-n) / 2x
 
 FUNC newton ( n )
 BEGIN
