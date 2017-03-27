@@ -1,12 +1,10 @@
-.data
+.section .data
 
 str:
     .string "%ld is a prime factor\n"
 
-
-.text
+.section .text
 .globl main
-.globl factor
 factor:
     pushq %rbp          # save base pointer
     movq %rsp, %rbp     # set new base pointer

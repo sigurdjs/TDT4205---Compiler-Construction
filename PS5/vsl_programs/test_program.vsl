@@ -1,7 +1,12 @@
 VAR x,y,z
-FUNC f(a,b)
+FUNC f(a,b,c,d,e,f,g,h)
 BEGIN
+    VAR trash
+    PRINT "a:", a, " b:", b, " c:", c, "\n"
+    PRINT "d:", d, " e:", e, " f:", f, "\n"
+    PRINT "g:", g, " h:", h, "\n"
 
+    trash := args((a*b*c),b,c,d,e,f,g,h)
     // Access arguments, assignments:
     x := a
     y := b
@@ -24,4 +29,12 @@ BEGIN
     ELSE
         PRINT "In else case\n"
     RETURN z
+END
+
+FUNC args(a,b,c,d,e,f,g,h)
+BEGIN
+    PRINT "In function args\n"
+    PRINT "a:", a, " b:", b, " c:", c, "\n"
+    PRINT "d:", d, " e:", e, " f:", f, "\n"
+    PRINT "g:", g, " h:", h, "\n"
 END

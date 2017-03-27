@@ -12,6 +12,8 @@ main ( int argc, char **argv )
     //node_print(root,0);
     find_globals();
     find_locals();
+    //print_symbols();
+    //print_bindings(root);
     generate_program ();
 
     destroy_subtree ( root );

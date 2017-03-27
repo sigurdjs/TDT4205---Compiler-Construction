@@ -10,7 +10,6 @@ static const char *scratch_regs[4] = {
 
 size_t n_parms;
 size_t loop_cntr = 0;
-size_t func_cntr = 0;
 size_t cond_cntr = 0;
 
 static void generate_statement(node_t *node);
@@ -50,18 +49,23 @@ static void generate_globals ( void )
 
 static void allocate_stack_space(symbol_t *func) {
     size_t n_locals = tlhash_size(func->locals);
-    /* Allocate space on stack for paramateres
-    + local variables + ensure 16-bit alignment */
+    /* Allocate space on stack for local variables.
+    Parameters are pushed. */
     if (n_locals % 2 == 0)
-        printf("\tsubq $%zu, %%rsp\n",8*n_locals);
+        printf("\tsubq $%zu, %%rsp\n",8*(n_locals-n_parms));
     else
-        printf("\tsubq $%zu, %%rsp\n",(size_t) 8*(n_locals+1));
-
+        printf("\tsubq $%zu, %%rsp\n",8*(n_locals-n_parms+1));
 }
 
 static void save_parm_to_stack(symbol_t *func) {
     for (size_t i = 0; i < n_parms; i++){
-        printf("\tmovq %s, -%zu(%%rbp)\n",record[i],8*(i+1));
+        if (i < 6)
+            printf("\tpushq %s\n",record[i]);
+        else
+            /* Since base pointer is pushed at function call
+            the first argument is at %rbp + 16, hence i - 4 */
+            printf("\tpushq %zu(%%rbp)\n",(i-4)*8);
+
     }
 }
 
@@ -88,6 +92,7 @@ static void mov_variable(node_t *node, char* dest_reg) {
 }
 
 static void get_var_register(node_t *node, char** reg) {
+    /* Returns correct register string for variable */
     if (node->type == IDENTIFIER_DATA){
         switch (node->entry->type) {
             case SYM_GLOBAL_VAR:
@@ -104,11 +109,12 @@ static void get_var_register(node_t *node, char** reg) {
 }
 
 static void generate_expression(node_t *node) {
+    /* Recursively generates expression
+    and leaves answer on top of stack */
     if (node->data == NULL) {
         generate_function_call(node);
         return;
     }
-    /* Recursively generates expression and leaves answer in %rax */
     for (size_t i = 0; i < node->n_children; i++) {
         if (node->children[i] != NULL && node->type == EXPRESSION)
             generate_expression(node->children[i]);
@@ -187,23 +193,27 @@ static void generate_print_stmnt(node_t *node) {
             case STRING_DATA:
                 puts("\tmovq $strout, %rdi");
                 printf("\tmovq $STR%zu, %%rsi\n",*((size_t*)child->data));
+                puts("\tmovq $0, %rax"); //rax has to be 0 before call
                 puts("\tcall printf");
                 break;
             case EXPRESSION:
                 generate_expression(child);
                 puts("\tmovq $intout, %rdi");
                 puts("\tpopq %rsi");
+                puts("\tmovq $0, %rax"); //rax has to be 0 before call
                 puts("\tcall printf");
                 break;
             case NUMBER_DATA:
                 puts("\tmovq $intout, %rdi");
                 printf("\tmovq $%ld, %%rsi\n",*((int64_t*)child->data));
+                puts("\tmovq $0, %rax"); //rax has to be 0 before call
                 puts("\tcall printf");
                 break;
             case IDENTIFIER_DATA:
                 puts("\tmovq $intout, %rdi");
                 get_var_register(child,&reg);
                 printf("\tmovq %s, %%rsi\n",reg);
+                puts("\tmovq $0, %rax"); //rax has to be 0 before call
                 puts("\tcall printf");
                 break;
         }
@@ -366,9 +376,9 @@ static void generate_function_call(node_t *node) {
     char *reg = malloc(256);
     node_t *func = node->children[0];
     node_t *expr_list = node->children[1];
-    for (size_t i = 0; i < expr_list->n_children; i++) {
+    for (size_t i = 0; i < MIN(6,expr_list->n_children); i++) {
         node_t *child = expr_list->children[i];
-        switch (expr_list->children[i]->type) {
+        switch (child->type) {
             case NUMBER_DATA:
                 printf("\tmovq $%ld, %s\n",*((int64_t*)child->data),record[i]);
                 break;
@@ -382,8 +392,24 @@ static void generate_function_call(node_t *node) {
                 break;
         }
     }
+    for (size_t i = expr_list->n_children; i > 6; i--) {
+        node_t *child = expr_list->children[i-1];
+        switch (child->type) {
+            case NUMBER_DATA:
+                printf("\tpushq $%ld\n",*((int64_t*)child->data));
+                break;
+            case IDENTIFIER_DATA:
+                get_var_register(child,&reg);
+                printf("\tpushq %s\n",reg);
+                break;
+            case EXPRESSION:
+                generate_expression(child);
+                break;
+        }
+    }
     printf("\tcall _%s\n",func->entry->name);
     puts("\tpushq %rax");
+    free(reg);
 }
 
 static void generate_function (symbol_t *function) {
@@ -391,11 +417,11 @@ static void generate_function (symbol_t *function) {
     puts ( "\tpushq %rbp" );
     puts ( "\tmovq %rsp, %rbp" );
     n_parms = function->nparms;
-    allocate_stack_space(function);
     save_parm_to_stack(function);
+    allocate_stack_space(function);
     traverse_tree(function->node);
-    func_cntr++;
-    puts("\tleave");
+    puts("\tmovq %rbp, %rsp");
+    puts("\tpopq %rbp");
     puts("\tret");
 }
 
