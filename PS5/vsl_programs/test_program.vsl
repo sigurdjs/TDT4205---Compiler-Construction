@@ -1,40 +1,33 @@
 VAR x,y,z
-FUNC f(a,b,c,d,e,f,g,h)
+FUNC f()
 BEGIN
-    VAR trash
-    PRINT "a:", a, " b:", b, " c:", c, "\n"
-    PRINT "d:", d, " e:", e, " f:", f, "\n"
-    PRINT "g:", g, " h:", h, "\n"
-
-    trash := args((a*b*c),b,c,d,e,f,g,h)
-    // Access arguments, assignments:
-    x := a
-    y := b
-    // Print statements
-
+	VAR counter
+	counter := 0
     WHILE x < 10 DO
     BEGIN
         y := 0
         WHILE y < 10 DO
         BEGIN
-            PRINT "Looping....\n"
-            y := y + 1
+		counter := counter + 1
+	    y := y + 1
+		IF counter < 50 THEN
+		BEGIN
+			CONTINUE
+		END
+		z := args(counter)
         END
         x := x + 1
     END
-
-
-    IF a > 1 THEN
-        PRINT "In if case\n"
-    ELSE
-        PRINT "In else case\n"
     RETURN z
 END
 
-FUNC args(a,b,c,d,e,f,g,h)
+FUNC args(arg)
 BEGIN
-    PRINT "In function args\n"
-    PRINT "a:", a, " b:", b, " c:", c, "\n"
-    PRINT "d:", d, " e:", e, " f:", f, "\n"
-    PRINT "g:", g, " h:", h, "\n"
+	PRINT "Jørgen er en flott fyr, nå er vi på runde: ", arg, "\n"
+	RETURN 0
+END
+
+FUNC args2(arg)
+BEGIN
+	PRINT "Men Simon er bedre", arg, "\n"
 END

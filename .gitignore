@@ -1,4 +1,7 @@
 *.zip
 /PS5/src/vslc.dSYM/*
 *.o
-
+*.swp
+*.swn
+*.swm
+*.swo

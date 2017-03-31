@@ -295,24 +295,30 @@ static void generate_if_stmnt(node_t *node) {
 static void generate_while_stmnt(node_t *node) {
     size_t cur_loop = loop_cntr++;
     printf("_loop%zu:\n",cur_loop);
-    generate_statement(node->children[1]);
     node_t *relation = node->children[0];
     generate_relation(relation);
     switch (*((char*)relation->data)){
         case '=':
-            printf("\tje _loop%zu\n",cur_loop);
             printf("\tjne _loop_finished%zu\n",cur_loop);
+            generate_statement(node->children[1]);
+            printf("\tjmp _loop%zu\n",cur_loop);
             break;
         case '<':
-            printf("\tjl _loop%zu\n",cur_loop);
             printf("\tjge _loop_finished%zu\n",cur_loop);
+            generate_statement(node->children[1]);
+            printf("\tjmp _loop%zu\n",cur_loop);
             break;
         case '>':
-            printf("\tjg _loop%zu\n",cur_loop);
             printf("\tjle _loop_finished%zu\n",cur_loop);
+            generate_statement(node->children[1]);
+            printf("\tjmp _loop%zu\n",cur_loop);
             break;
     }
     printf("_loop_finished%zu:\n",cur_loop);
+}
+
+static void generate_null_stmnt(void) {
+    printf("\tjmp _loop%zu\n",loop_cntr-1);
 }
 
 static void generate_statement(node_t *node) {
@@ -334,6 +340,9 @@ static void generate_statement(node_t *node) {
             break;
         case BLOCK:
             generate_block_stmnt(node);
+            break;
+        case NULL_STATEMENT:
+            generate_null_stmnt();
             break;
     }
 }
@@ -376,35 +385,37 @@ static void generate_function_call(node_t *node) {
     char *reg = malloc(256);
     node_t *func = node->children[0];
     node_t *expr_list = node->children[1];
-    for (size_t i = 0; i < MIN(6,expr_list->n_children); i++) {
-        node_t *child = expr_list->children[i];
-        switch (child->type) {
-            case NUMBER_DATA:
-                printf("\tmovq $%ld, %s\n",*((int64_t*)child->data),record[i]);
-                break;
-            case IDENTIFIER_DATA:
-                get_var_register(child,&reg);
-                printf("\tmovq %s, %s\n",reg,record[i]);
-                break;
-            case EXPRESSION:
-                generate_expression(child);
-                printf("\tpopq %s\n",record[i]);
-                break;
+    if(expr_list != NULL) {
+        for (size_t i = 0; i < MIN(6,expr_list->n_children); i++) {
+            node_t *child = expr_list->children[i];
+            switch (child->type) {
+                case NUMBER_DATA:
+                    printf("\tmovq $%ld, %s\n",*((int64_t*)child->data),record[i]);
+                    break;
+                case IDENTIFIER_DATA:
+                    get_var_register(child,&reg);
+                    printf("\tmovq %s, %s\n",reg,record[i]);
+                    break;
+                case EXPRESSION:
+                    generate_expression(child);
+                    printf("\tpopq %s\n",record[i]);
+                    break;
+            }
         }
-    }
-    for (size_t i = expr_list->n_children; i > 6; i--) {
-        node_t *child = expr_list->children[i-1];
-        switch (child->type) {
-            case NUMBER_DATA:
-                printf("\tpushq $%ld\n",*((int64_t*)child->data));
-                break;
-            case IDENTIFIER_DATA:
-                get_var_register(child,&reg);
-                printf("\tpushq %s\n",reg);
-                break;
-            case EXPRESSION:
-                generate_expression(child);
-                break;
+        for (size_t i = expr_list->n_children; i > 6; i--) {
+            node_t *child = expr_list->children[i-1];
+            switch (child->type) {
+                case NUMBER_DATA:
+                    printf("\tpushq $%ld\n",*((int64_t*)child->data));
+                    break;
+                case IDENTIFIER_DATA:
+                    get_var_register(child,&reg);
+                    printf("\tpushq %s\n",reg);
+                    break;
+                case EXPRESSION:
+                    generate_expression(child);
+                    break;
+            }
         }
     }
     printf("\tcall _%s\n",func->entry->name);

@@ -54,3 +54,15 @@ prime: src/vslc
 	$(shell gcc a.s -o test)
 	./test
 	rm -f a.s test
+fibonacci_iter: src/vslc
+	$(info ########### Running fibonacci_iterative.vsl ###########)
+	$(shell src/vslc < vsl_programs/fibonacci_iterative.vsl > a.s)
+	$(shell gcc a.s -o test)
+	./test 45 
+	rm -f a.s test
+fibonacci_rec: src/vslc
+	$(info ########### Running fibonacci_recursive.vsl ###########)
+	$(shell src/vslc < vsl_programs/fibonacci_recursive.vsl > a.s)
+	$(shell gcc a.s -o test)
+	./test 45 
+	rm -f a.s test

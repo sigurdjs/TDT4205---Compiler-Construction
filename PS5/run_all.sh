@@ -8,3 +8,8 @@ echo
 make newton
 echo
 make prime
+echo
+make fibonacci_iter
+echo
+make fibonacci_rec
+echo

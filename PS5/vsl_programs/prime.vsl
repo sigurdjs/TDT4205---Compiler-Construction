@@ -9,8 +9,7 @@ END
 FUNC factor (n)
 BEGIN
     VAR f
-
-    f := n/2
+	    f := n/2
     WHILE n - f*(n/f) > 0 DO
         BEGIN
         f := f - 1
