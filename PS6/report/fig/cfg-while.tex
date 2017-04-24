@@ -1,0 +1,21 @@
+\tikzset{%
+  % Specifications for style of nodes:
+         base/.style = {rectangle, rounded corners, draw = black, minimum width=2.5cm, minimum height=1cm, fill=orange!15, font=\ttfamily},
+}
+
+\begin{tikzpicture}[node distance=2cm, every node/.style={fill=white, font=\sffamily}, align=center]
+    % Draw nodes
+    \node (start)       [base]                        {a;};
+    \node (while)       [base, below of = start]      {while(b)};
+    \node (code)        [base, below of = while]      {d;\\c;};
+    \node (end)         [base, below of = code]       {e;};
+
+    % Draw arrows
+    \draw[->,thick]           (start) -- (while);
+    \draw[->,thick]           (while) -- (code);
+
+    \draw[->,thick]       (code.west) -- ++(-1.5,0) -- ++(0,4) -- ++(1.5,0)         (while);
+    \draw[->,thick]       (while.east) -- ++(1.5,0) -- ++(0,-4) -- ++(-1.5,0)     (end);
+
+
+\end{tikzpicture}

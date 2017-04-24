@@ -1,0 +1,33 @@
+VAR x,y,z
+FUNC f()
+BEGIN
+	VAR counter
+	counter := 0
+    WHILE x < 10 DO
+    BEGIN
+        y := 0
+        WHILE y < 10 DO
+        BEGIN
+		counter := counter + 1
+	    y := y + 1
+		IF counter < 50 THEN
+		BEGIN
+			CONTINUE
+		END
+		z := args(counter)
+        END
+        x := x + 1
+    END
+    RETURN z
+END
+
+FUNC args(arg)
+BEGIN
+	PRINT "Jørgen er en flott fyr, nå er vi på runde: ", arg, "\n"
+	RETURN 0
+END
+
+FUNC args2(arg)
+BEGIN
+	PRINT "Men Simon er bedre", arg, "\n"
+END

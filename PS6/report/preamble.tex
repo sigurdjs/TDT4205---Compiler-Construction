@@ -1,0 +1,25 @@
+\documentclass[11pt, a4paper, USenglish]{article} % change ``USenglish'' to ``norsk'' if applicable.
+
+% Search http://ctan.org or type texdoc <package name> in a terminal to access LaTeX package documentation.
+\usepackage{babel} % babel and csquotes are packages for multilingual (e.g. Norwegian) support.
+\usepackage[T1]{fontenc} % See http://tex.stackexchange.com/questions/664/why-should-i-use-usepackaget1fontenc
+\usepackage[utf8]{inputenc} % See http://tex.stackexchange.com/questions/44694/fontenc-vs-inputenc
+\usepackage{csquotes} % Needs to be loaded after inputenc.
+\usepackage{amsmath} % See: http://tex.stackexchange.com/questions/32100/what-does-each-ams-package-do
+\usepackage{amssymb} % See above.
+\usepackage[squaren]{SIunits} % Provides SI units like \meter. The squaren option is due to a conflict with amssymb.
+\usepackage{graphicx} % Provides the \includegraphics command.
+\usepackage{caption}
+\usepackage{subcaption} % More and better captions for figures
+\usepackage{booktabs} % Better tables. Provides \toprule, \midrule, \bottomrule.
+\usepackage{bm}
+\usepackage{hyperref} % Provides clickable links. Always load last, but before cleveref.
+\usepackage{tikz}
+
+
+% Disable automatic indentation (equal to using \noindent)
+\setlength{\parindent}{0cm}
+
+
+
+\usepackage{cleveref} % Provides the \Cref command, for cross-referencing of equations, sections, figures and tables. Always load last.

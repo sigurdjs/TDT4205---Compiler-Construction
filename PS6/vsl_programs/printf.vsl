@@ -1,0 +1,4 @@
+FUNC main()
+BEGIN
+	PRINT "This is a string\n"
+END	
