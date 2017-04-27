@@ -2,31 +2,59 @@
 
 \subsection{Control flow graphs}
 \begin{figure}[h]
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \input{fig/cfg-for}
+        \caption{Control flow graph for for loop}
+        \label{fig:cfg_for}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \input{fig/cfg-while}
+        \caption{Control flow graph for while loop}
+        \label{fig:cfg_while}
+    \end{subfigure}
+    \par\bigskip\medskip
     \centering
-    \input{fig/cfg-for}
-    \caption{Control flow graph for for loop}
-    \label{fig:cfg_for}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \input{fig/cfg-while-do}
+        \caption{Control flow graph for do-while loop}
+        \label{fig:cfg_do_while}
+    \end{subfigure}
 \end{figure}
 
-\begin{figure}[h]
-    \centering
-    \input{fig/cfg-while}
-    \caption{Control flow graph for while loop}
-    \label{fig:cfg_while}
-\end{figure}
 
-\begin{figure}[h]
-    \centering
-    \input{fig/cfg-while-do}
-    \caption{Control flow graph for do-while loop}
-    \label{fig:cfg_do_while}
-\end{figure}
-\clearpage
+\newpage
 \subsection{Program fragment}
-
+\subsubsection{Control flow graph of program fragment}
 \begin{figure}[h]
     \centering
     \input{fig/cfg-program}
     \caption{Control flow graph for program fragment}
     \label{fig:cfg_program}
 \end{figure}
+
+\subsubsection{Dominator equations}\label{sec:dom_eq}
+\begin{subequations}
+    \begin{align}
+        D(1) &= \{1\}\\
+        D(2) &= D(1) \cup \{2\} = \{1,2\}\\
+        D(3) &= D(2) \cup \{3\} = \{1,2,3\}\\
+        D(4) &= D(3) \cup \{4\} = \{1,2,3,4\}\\
+        D(5) &= D(4) \cup \{5\} = \{1,2,3,4,5\}\\
+        D(6) &= D(4) \cup \{6\} = \{1,2,3,4,6\}\\
+        D(7) &= D(2) \cup \{7\} = \{1,2,7\}
+    \end{align}
+\end{subequations}
+
+\subsubsection{Dominator tree}
+\begin{figure}[h]
+    \centering
+    \input{fig/dom_tree}
+    \caption{Dominator tree from equations in \cref{sec:dom_eq}}
+\end{figure}
+
+\section{Code}
+See attached code. Run bash run\_all.sh to compile compiler, compile vsl-programs and run with predetermined input.

@@ -1,0 +1,18 @@
+\begin{tikzpicture}[node distance=1.5cm, every node/.style={circle, draw = black, fill=white, font=\sffamily}, align=center]
+    % Draw nodes
+    \node (start)   [begin]             {1};
+    \node (2)       [below of = start]  {2};
+    \node (3)       [below of = 2]      {3};
+    \node (4)       [below of = 3]      {4};
+    \node (5)       [below of = 4]      {5};
+    \node (6)       [right of = 5]      {6};
+    \node (7)       [right of = 3]      {7};
+
+    % Draw arrows
+    \draw[->] (start) -- (2);
+    \draw[->] (2) -- (3);
+    \draw[->] (3) -- (4);
+    \draw[->] (4) -- (5);
+    \draw[->] (2) -- (7);
+    \draw[->] (4) -- (6);
+\end{tikzpicture}

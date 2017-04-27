@@ -5,19 +5,17 @@
 
 \begin{tikzpicture}[node distance=2cm, every node/.style={fill=white, font=\sffamily}, align=center]
     % Draw nodes
-    \node (start)       [base]                        {a;};
+    \node (start)       [base]                        {a};
     \node (if)          [base, below of = start]      {if(b)};
-    \node (code)        [base, below of = if]         {d;};
-    \node (incr)        [base, below of = code]       {c;};
-    \node (end)         [base, below of = incr]       {e;};
+    \node (incr)        [base, below of = if]       {d\\c};
+    \node (end)         [base, below of = incr]       {e};
 
     % Draw arrows
     \draw[->,thick]           (start) -- (if);
-    \draw[->,thick]              (if) -- (code);
-    \draw[->,thick]            (code) -- (incr);
+    \draw[->,thick]            (if) -- node[left = 0.1cm, midway] {true} (incr);
 
-    \draw[->,thick]            (incr.west) -- ++(-1.5,0) -- ++(0,4) -- ++(1.5,0) (if);
-    \draw[->,thick]         (if.east) -- ++(1.5,0) -- ++(0,-6) -- ++(-1.5,0)     (end);
+    \draw[->,thick]            (incr.west) -- ++(-1.5,0) -- ++(0,2) -- ++(1.5,0) (if);
+    \draw[->,thick]         (if.east) -- node[above = 0.1cm,midway] {false} ++(1.5,0) -- ++(0,-4) -- ++(-1.5,0)     (end);
 
 
 \end{tikzpicture}

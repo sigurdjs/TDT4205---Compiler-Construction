@@ -5,27 +5,32 @@
          begin/.style = { base, fill=blue!30 },
          end/.style =   { base, fill=red!30 },
 }
-
 \begin{tikzpicture}[node distance=2cm, every node/.style={fill=white, font=\sffamily}, align=center]
     % Draw nodes
-    \node (start)       [begin]                        {i = 0};
-    \node (if_1)        [node, below of = start]       {if(i < n)};
-    \node (block)       [node, below of = if_1]        {sum = 4*i \\ j = 0};
-    \node (if_2)        [node, below of = block]       {if(j < m)};
-    \node (block_2)     [node, below of = if_2]        {t1 = b*2 \\ t2 = a + t1 \\ a = t2};
-    \node (block_3)     [node, below of = block_2]     {t3 = j + i \\ j = t3};
-    \node (block_4)     [node, below of = block_3]     {i++};
-    \node (end)         [end, below of = block_4]      {end};
+    \node (start)       [begin]                           {i = 0};
+    \node               [above right = 0.1cm of start]    {\footnotesize{1}};
+    \node (if_1)        [node, below of = start]          {if(i < n)};
+    \node               [above right = 0.1cm of if_1]     {\footnotesize{2}};
+    \node (block)       [node, below of = if_1]           {sum = 4*i \\ j = 0};
+    \node               [above right = 0.1cm of block]    {\footnotesize{3}};
+    \node (if_2)        [node, below of = block]          {if(j < m)};
+    \node               [above right = 0.1cm of if_2]     {\footnotesize{4}};
+    \node (block_2)     [node, below of = if_2]           {t1 = b*2 \\ a = a+t1 \\ j = j+1};
+    \node               [above right = 0.1cm of block_2]  {\footnotesize{5}};
+    \node (block_3)     [node, below of = block_2]        {i = i+1};
+    \node               [above right = 0.1cm of block_3]  {\footnotesize{6}};
+    \node (end)         [end, below of = block_3]         {end};
+    \node               [above right = 0.1cm of end]      {\footnotesize{7}};
 
     % Draw arrows
     \draw[->,thick]           (start) -- (if_1);
-    \draw[->,thick]           (if_1) -- (block);
+    \draw[->,thick]           (if_1) -- node[left = 0.1cm, midway] {true} (block);
     \draw[->,thick]           (block) -- (if_2);
-    \draw[->,thick]           (if_2) -- (block_2);
-    \draw[->,thick]           (block_2) -- (block_3);
+    \draw[->,thick]           (if_2) -- node[left = 0.1cm, midway] {true} (block_2);
+    %\draw[->,thick]           (block_2) -- (block_3);
 
-    \draw[->,thick]           (block_3.west) -- ++(-1.5,0) -- ++(0,4) -- ++(1.5,0) (if_2);
-    \draw[->,thick]           (if_2.east) -- ++(1.5,0) -- ++(0,-6) -- ++(-1.5,0) (block_3);
-    \draw[->,thick]           (block_4.west) -- ++(-2.5,0) -- ++(0,10) -- ++(2.5,0) (if_1);
-    \draw[->,thick]           (if_1.east) -- ++(2.5,0) -- ++(0,-12) -- ++(-2.5,0) (end);
+    \draw[->,thick]           (block_2.west) -- ++(-1.5,0) -- ++(0,2) -- ++(1.5,0) (if_2);
+    \draw[->,thick]           (if_2.east) -- node[midway, above = 0.1cm] {false} ++(1.5,0) -- ++(0,-4) -- ++(-1.5,0) (block_3);
+    \draw[->,thick]           (block_3.west) -- ++(-2.5,0) -- ++(0,8) -- ++(2.5,0) (if_1);
+    \draw[->,thick]           (if_1.east) -- node[midway, above = 0.1cm] {false} ++(2.5,0) -- ++(0,-10) -- ++(-2.5,0) (end);
 \end{tikzpicture}
